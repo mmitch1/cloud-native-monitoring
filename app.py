@@ -10,8 +10,15 @@ def index():
     Message = None
     if ((cpu_percent) > 80 or (mem_percent > 80)):
         Message = "You must scale up resources. There has been a detection of High CPU or Memory Utilization."
-    return f"CPU Utilization: {cpu_percent} and Memory Utilization: {mem_percent}"
-    # return render_template("index.html", cpu_percent = cpu_percent, mem_percent = mem_percent, message = Message)
+    # return f"CPU Utilization: {cpu_percent} and Memory Utilization: {mem_percent}"
+        
+    # Debugging messages
+    print(f"CPU Utilization: {cpu_percent}%")
+    print(f"Memory Utilization: {mem_percent}%")
+    if Message:
+        print(f"Message: {Message}")
+
+    return render_template("index.html", cpu_percent = cpu_percent, mem_percent = mem_percent, message = Message)
 
 if __name__ == '__main__':
     app.run(debug = True, host = '0.0.0.0')
