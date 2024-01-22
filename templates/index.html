@@ -3,7 +3,7 @@
 <head>
     <title>System Monitoring App</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
@@ -14,10 +14,10 @@
         <div class="alert alert-danger">{{ message }}</div>
         {% endif %}
     </div>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            gaugeRender({{ cpu_percent }}, {{ mem_percent }});
+            renderGauges({{ cpu_percent }}, {{ mem_percent }});
         });
     </script>
 </body>
