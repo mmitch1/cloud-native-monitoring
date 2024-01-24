@@ -29,5 +29,27 @@ deployment = client.V1Deployment(
             )
         )
     )
+)
 
+# Deploy the Application
+api_instance = client.AppsV1Api(api_client)
+api_instance.create_namespaced_deployment(
+    namespace="default",
+    body=deployment
+)
+
+# Service definition
+service = client.V1Service(
+    metadata=client.V1ObjectMeta(name="cloud-flask-service"),
+    spec=client.V1ServiceSpec(
+        selector={"app": "cloud-monitor-flask-app"},
+        ports=[client.V1ServicePort(port=5000)]
+    )
+)
+
+# Service Creation
+api_instance = client.CoreV1Api(api_client)
+api_instance.create_namespaced_service(
+    namespace="default",
+    body=service
 )
